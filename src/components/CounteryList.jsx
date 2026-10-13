@@ -2,10 +2,12 @@ import { FaSearch } from "react-icons/fa";
 import { useGetCountriesQuery } from "../services/countryApi";
 import { useState } from "react";
 import Country from "./Countery";
+import CounteryInfo from "./CounteryInfo";
 
 function CountryList() {
   const [search, setSearch] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
+  const [SelectedCountery, setSelectedCountery] = useState(null);
   const [page, setPage] = useState(1);
   const limit = 10;
 
@@ -89,7 +91,11 @@ function CountryList() {
             <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {countries.length > 0 ? (
                 countries.map((country) => (
-                  <Country key={country.uuid} country={country} />
+                  <Country
+                    key={country.uuid}
+                    country={country}
+                    onClick={() => setSelectedCountery(country)}
+                  />
                 ))
               ) : (
                 <h2 className="col-span-full py-16 text-center text-xl font-medium text-gray-500">
@@ -98,6 +104,15 @@ function CountryList() {
               )}
             </div>
           )}
+
+          {SelectedCountery ? (
+            <CounteryInfo
+              country={SelectedCountery}
+              onClose={function () {
+                setSelectedCountery(null);
+              }}
+            />
+          ) : null}
 
           {/* Pagination */}
           <div className="flex flex-col items-center justify-between gap-4 rounded-2xl bg-white p-5 shadow-sm sm:flex-row">

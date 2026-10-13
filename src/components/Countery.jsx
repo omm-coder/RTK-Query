@@ -1,8 +1,11 @@
 import React from "react";
 
-function Country({ country }) {
+function Country({ country, onClick}) {
   return (
-    <div className="flex flex-col justify-between overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-lg transition duration-300 hover:scale-[1.02] hover:shadow-xl">
+    <div className="flex flex-col justify-between overflow-hidden rounded-2xl 
+    border border-gray-100 bg-white shadow-lg transition duration-300 hover:scale-[1.02] 
+    hover:shadow-xl"
+    onClick={onClick}>
       <div className="h-48 w-full overflow-hidden bg-gray-100">
         <img
           className="h-full w-full object-cover"
